@@ -1,0 +1,23 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.cov
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+# IDE/editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Swaggo generated docs
+/docs/docs.go

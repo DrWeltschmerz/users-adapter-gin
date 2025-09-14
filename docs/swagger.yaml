@@ -1,0 +1,13 @@
+openapi: 3.0.0
+info:
+  title: Users API
+  version: 1.0.0
+  description: API documentation for the users-core Gin adapter
+servers:
+  - url: /
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
