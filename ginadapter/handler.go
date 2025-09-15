@@ -29,6 +29,10 @@ func (h *UserHandlers) Register(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid input"})
 		return
 	}
+	if input.Email == "" || input.Username == "" || input.Password == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "email, username, and password are required"})
+		return
+	}
 	user, err := h.Svc.Register(c.Request.Context(), input)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

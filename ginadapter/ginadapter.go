@@ -1,6 +1,3 @@
-// Package ginadapter provides a generic Gin HTTP API for users-core.package ginadapter
-
-// Usage: import this package, inject your users.Service and Tokenizer, and call RegisterRoutes.
 package ginadapter
 
 import (
@@ -23,12 +20,12 @@ func RegisterRoutes(r *gin.Engine, svc *core.Service, tokenizer core.Tokenizer) 
 	auth.PUT("/profile", h.UpdateProfile)
 	auth.POST("/change-password", h.ChangePassword)
 
-	// Admin/user management
-	r.GET("/users", h.ListUsers)
-	r.DELETE("/users/:id", h.DeleteUser)
-
-	// Role management
-	r.GET("/roles", h.ListRoles)
-	r.POST("/users/:id/assign-role", h.AssignRole)
-	r.POST("/users/:id/reset-password", h.ResetPassword)
+	// Admin routes
+	admin := r.Group("")
+	admin.Use(JWTMiddleware(tokenizer), AdminMiddleware(svc))
+	admin.GET("/users", h.ListUsers)
+	admin.DELETE("/users/:id", h.DeleteUser)
+	admin.GET("/roles", h.ListRoles)
+	admin.POST("/users/:id/assign-role", h.AssignRole)
+	admin.POST("/users/:id/reset-password", h.ResetPassword)
 }
